@@ -4,13 +4,20 @@
 
 
 # Quick Reference
+----
 The hate2wait API endpoint is https://app.hate2wait.io/api/v1 and all paths below are relative to that. hate2wait uses HTTP Basic Auth for authentication and all calls must be over HTTPS.
 
 | Authentication | Description |
 | ------ | ------ |
 | h2w-authtoken | A unique auth token provided to the user to make API calls. |
 
-### List All Locations
+# Getting your Auth Token
+----
+The hate2wait API is tied to your hate2wait Business account. You will receive your auth token post creating account on hate2wait for Businesses. Our support will help you with creating a auth token to use hate2wait API
+
+# REST API
+----
+### 1. List All Locations
 List of all locations
 
 ### GET /locations
@@ -63,8 +70,9 @@ Content-Type:application/json;charset=UTF-8
 | created_time | Time when the location was created |
 | updated_time | Time when the location was last updated |
 
+-----------------------------------------------------------------------------
 
-### List of all the queues of a location
+### 2. List of all the queues of a location
 List of all the queues created for a particular location.
 
 ### GET /{location_id}/queues
@@ -109,7 +117,9 @@ Content-Type:application/json;charset=UTF-8
 | created_time | Time when the location was created |
 | updated_time | Time when the location was last updated |
 
-### Create a queue booking
+-----------------------------------------------------------------------------
+
+### 3. Create a queue booking
 Create a queue booking.
 
 ### POST /queue_bookings
@@ -163,8 +173,9 @@ Content-Type:application/json;charset=UTF-8
 | ------ | ------ |
 | booking_id | A unique booking id |
 
+-----------------------------------------------------------------------------
 
-### Create an appointment
+### 4. Create an appointment
 Create an appointment.
 
 ### POST /appointments
@@ -220,8 +231,9 @@ Content-Type:application/json;charset=UTF-8
 | ------ | ------ |
 | appointment_id | A unique appointment id |
 
+-----------------------------------------------------------------------------
 
-### Cancel a queue booking
+### 5. Cancel a queue booking
 Cancel a queue booking.
 
 ### GET /queue_bookings/{booking_id}/cancel
@@ -250,7 +262,9 @@ Content-Type:application/json;charset=UTF-8
 
 ```
 
-### Cancel an appointment
+-----------------------------------------------------------------------------
+
+### 6. Cancel an appointment
 Cancel an appointment
 
 ### GET /appointments/{appointment_id}/cancel
@@ -279,7 +293,9 @@ Content-Type:application/json;charset=UTF-8
 
 ```
 
-### Get current status of a queue booking
+-----------------------------------------------------------------------------
+
+### 7. Get current status of a queue booking
 Get live status of a queue booking
 
 ### GET /queue_bookings/{booking_id}/status
@@ -329,7 +345,9 @@ Content-Type:application/json;charset=UTF-8
 | created_time | Time when the booking was created |
 | updated_time | Time when the booking was last updated |
 
-### Get status of an appointment
+-----------------------------------------------------------------------------
+
+### 8. Get status of an appointment
 Get status of an appointment
 
 ### GET /appointments/{appointment_id}/status
@@ -385,7 +403,9 @@ Content-Type:application/json;charset=UTF-8
 | updated_time | Time when the appointment was last updated |
 | booking_details | Once an appointment is moved into the queue, booking details will contain all the details of a queue bookings |
 
-### Get current status of a queue
+-----------------------------------------------------------------------------
+
+### 9. Get current status of a queue
 Get current status of a queue
 
 ### GET /queue/{queue_id}/status
@@ -427,8 +447,9 @@ Content-Type:application/json;charset=UTF-8
 | wait_time | Approx waiting time for a turn to come up of a booking if created now|
 | last_updated_at | Time when the queue was last updated i.e someone got checked out, waiting time is reduced, some booking is made, etc |
 
-### Response Status Codes
 
+# Response Status Codes
+----
 All hate2wait APIs return a response in json format. The API returns one of the following HTTP status codes.
 
 | Status Code | Description |
@@ -442,6 +463,19 @@ All hate2wait APIs return a response in json format. The API returns one of the 
 | 404 | Resource cannot be found |
 | 405 | HTTP method not allowed |
 | 500 | Server error |
+
+# Usage Limits
+----
+1. hate2wait API supports upto 100,000 requests daily.
+2. And not more than 1000 requests per second.
+
+If your API usage reaches your limit on any given day, your application will not be able to access the API for the remainder of that day.
+
+# FAQ
+----
+
+Have questions? Need help? Email us at support@hate2wait.io and we'll add them to our list here.
+
 
 
 License
