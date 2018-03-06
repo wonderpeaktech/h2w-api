@@ -6,6 +6,9 @@
 # Quick Reference
 The hate2wait API endpoint is https://app.hate2wait.io/api/v1 and all paths below are relative to that. hate2wait uses HTTP Basic Auth for authentication and all calls must be over HTTPS.
 
+| Authentication | Description |
+| ------ | ------ |
+| h2w-authtoken | A unique auth token provided to the user to make API calls. |
 
 ### List All Locations
 List of all locations
@@ -74,6 +77,10 @@ $ curl https://app.hate2wait.io/api/v1/{location_id}/queues
 -H "Authorization: h2w-authtoken ba4604e8e433g9c892e360d53463oec5"
 -H "Content-Type: application/json;charset=UTF-8"
 ```
+
+| Request Parameters | Description |
+| ------ | ------ |
+| location_id | A unique location id |
 
 ### Response Example
 
@@ -172,8 +179,8 @@ Content-Type:application/json;charset=UTF-8
 | queue_position | Current position in queue |
 | wait_time | Approx waiting time for the turn to come up  |
 | status | "QUEUED", "NOSHOW", "CANCELLED" or "SERVED"  |
-| created_time | Time when the location was created |
-| updated_time | Time when the location was last updated |
+| created_time | Time when the booking was created |
+| updated_time | Time when the booking was last updated |
 
 
 ### Create an appointment
@@ -205,6 +212,16 @@ $ curl https://app.hate2wait.io/api/v1/appointments
 }
 ```
 
+| Request Parameters | Description |
+| ------ | ------ |
+| queue_id | The ID of the queue for which you want to create a booking (required) |
+| first_name | First name of the person for whom booking is created (optional)  |
+| last_name | Last name of the person for whom booking is created (optional) |
+| phone_number | Phone number on which booking sms is to be send (required) |
+| appointment_time | Appointment time (required)  |
+| source | Source of booking. "APP", "WEB", "CALL" or "WALKIN" (optional). Default value is "WALKIN" |
+| additional_info | Additional info about the person for whom booking is created (optional) |
+
 ### Response Example
 
 
@@ -227,15 +244,14 @@ Content-Type:application/json;charset=UTF-8
 
 ```
 
-| Parameter | Description |
+| Response Fields | Description |
 | ------ | ------ |
-| queue_id | The ID of the queue for which you want to create a booking (required) |
-| first_name | First name of the person for whom booking is created (optional)  |
-| last_name | Last name of the person for whom booking is created (optional) |
-| phone_number | Phone number on which booking sms is to be send (required) |
-| appointment_time | Appointment time (required)  |
-| source | Source from which booking is created i.e App, Widget, Kiosk, IVR (required) |
-| additional_info | Additional info about the person for whom booking is created (optional) |
+| appointment_id | A unique appointment id |
+| queue_id | A unique queue id for which appointment is made  |
+| status | "APPOINTMENT", "NOSHOW", "CANCELLED" or "QUEUED"  |
+| created_time | Time when the appointment was created |
+| updated_time | Time when the appointment was last updated |
+| booking_details | Once an appointment is moved into the queue, booking details will contain all the details of a queue bookings |
 
 ### Cancel a queue booking
 Cancel a queue booking.
@@ -249,6 +265,10 @@ $ curl https://app.hate2wait.io/api/v1/queue_bookings/{booking_id}/cancel
 -H "Authorization: h2w-authtoken ba4604e8e433g9c892e360d53463oec5"
 -H "Content-Type: application/json;charset=UTF-8"
 ```
+
+| Request Parameters | Description |
+| ------ | ------ |
+| booking_id | A unique queue booking id |
 
 ### Response Example
 
@@ -276,6 +296,10 @@ $ curl https://app.hate2wait.io/api/v1/appointments/{appointment_id}/cancel
 -H "Content-Type: application/json;charset=UTF-8"
 ```
 
+| Request Parameters | Description |
+| ------ | ------ |
+| appointment_id | A unique appointment id |
+
 ### Response Example
 
 
@@ -302,6 +326,10 @@ $ curl https://app.hate2wait.io/api/v1/queue_bookings/{booking_id}/status
 -H "Content-Type: application/json;charset=UTF-8"
 ```
 
+| Request Parameters | Description |
+| ------ | ------ |
+| booking_id | A unique queue booking id |
+
 ### Response Example
 
 
@@ -325,6 +353,17 @@ Content-Type:application/json;charset=UTF-8
 
 ```
 
+| Response Fields | Description |
+| ------ | ------ |
+| booking_id | A unique booking id |
+| queue_id | A unique queue id for which booking is made  |
+| token_number | Token Number  |
+| queue_position | Current position in queue |
+| wait_time | Approx waiting time for the turn to come up  |
+| status | "QUEUED", "NOSHOW", "CANCELLED" or "SERVED"  |
+| created_time | Time when the booking was created |
+| updated_time | Time when the booking was last updated |
+
 ### Get status of an appointment
 Get status of an appointment
 
@@ -337,6 +376,10 @@ $ curl https://app.hate2wait.io/api/v1/appointments/{appointment_id}/status
 -H "Authorization: h2w-authtoken ba4604e8e433g9c892e360d53463oec5"
 -H "Content-Type: application/json;charset=UTF-8"
 ```
+
+| Request Parameters | Description |
+| ------ | ------ |
+| appointment_id | A unique appointment id |
 
 ### Response Example
 
@@ -369,6 +412,15 @@ Content-Type:application/json;charset=UTF-8
 
 ```
 
+| Response Fields | Description |
+| ------ | ------ |
+| appointment_id | A unique appointment id |
+| queue_id | A unique queue id for which appointment is made  |
+| status | "APPOINTMENT", "NOSHOW", "CANCELLED" or "QUEUED"  |
+| created_time | Time when the appointment was created |
+| updated_time | Time when the appointment was last updated |
+| booking_details | Once an appointment is moved into the queue, booking details will contain all the details of a queue bookings |
+
 ### Get current status of a queue
 Get current status of a queue
 
@@ -382,6 +434,10 @@ $ curl https://app.hate2wait.io/api/v1/queue/{queue_id}/status
 -H "Content-Type: application/json;charset=UTF-8"
 ```
 
+| Request Parameters | Description |
+| ------ | ------ |
+| queue_id | A unique queue id |
+
 ### Response Example
 
 
@@ -392,6 +448,7 @@ Content-Type:application/json;charset=UTF-8
     "code": 0,
     "message": "success",
     "queue_details": {
+        "queue_id": "37892139127391",
         "people_in_queue": 10,
         "wait_time": "24 mins (approx)",
         "last_updated_at": "2016-06-05T02:30:08-0700"
@@ -399,6 +456,13 @@ Content-Type:application/json;charset=UTF-8
 }
 
 ```
+
+| Response Fields | Description |
+| ------ | ------ |
+| queue_id | A unique queue id for which appointment is made  |
+| people_in_queue | Total no of people in the queue currently  |
+| wait_time | Approx waiting time for a turn to come up of a booking if created now|
+| last_updated_at | Time when the queue was last updated i.e someone got checked out, waiting time is reduced, some booking is made, etc |
 
 ### Response Status Codes
 
