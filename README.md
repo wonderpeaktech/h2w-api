@@ -30,7 +30,6 @@ $ curl https://app.hate2wait.io/api/v1/locations
 HTTP/1.1 200 OK
 Content-Type:application/json;charset=UTF-8
 {
-    "code": 0,
     "message": "success",
     "locations": [
         {
@@ -89,7 +88,6 @@ $ curl https://app.hate2wait.io/api/v1/{location_id}/queues
 HTTP/1.1 200 OK
 Content-Type:application/json;charset=UTF-8
 {
-    "code": 0,
     "message": "success",
     "queues": [
         {
@@ -155,18 +153,8 @@ $ curl https://app.hate2wait.io/api/v1/queue_bookings
 HTTP/1.1 200 OK
 Content-Type:application/json;charset=UTF-8
 {
-    "code": 0,
     "message": "success",
-    "booking_details": {
-        "booking_id": "903000000000099",
-        "queue_id": "23213dasda212121",
-        "token_number": "A010",
-        "queue_position": 10,
-        "wait_time": "24 mins (approx)",
-        "status": "Queued",
-        "updated_time": "2016-06-05T02:30:08-0700",
-        "created_time": "2016-06-05T12:30:08-0700"
-    },
+    "booking_id": "903000000000099"
 }
 
 ```
@@ -174,13 +162,6 @@ Content-Type:application/json;charset=UTF-8
 | Response Fields | Description |
 | ------ | ------ |
 | booking_id | A unique booking id |
-| queue_id | A unique queue id for which booking is made  |
-| token_number | Token Number  |
-| queue_position | Current position in queue |
-| wait_time | Approx waiting time for the turn to come up  |
-| status | "QUEUED", "NOSHOW", "CANCELLED" or "SERVED"  |
-| created_time | Time when the booking was created |
-| updated_time | Time when the booking was last updated |
 
 
 ### Create an appointment
@@ -229,17 +210,8 @@ $ curl https://app.hate2wait.io/api/v1/appointments
 HTTP/1.1 200 OK
 Content-Type:application/json;charset=UTF-8
 {
-    "code": 0,
     "message": "success",
-    "appointment_details": {
-        "appointment_id": "903000000000099",
-        "queue_id": "23213dasda212121",
-        "appointment_time": "2016-06-05T02:30:08-0700",
-        "status": "APPOINTMENT",
-        "updated_time": "2016-06-05T02:30:08-0700",
-        "created_time": "2016-06-05T12:30:08-0700"
-    },
-    "booking_details": {}
+    "appointment_id": "903000000000099"
 }
 
 ```
@@ -247,11 +219,7 @@ Content-Type:application/json;charset=UTF-8
 | Response Fields | Description |
 | ------ | ------ |
 | appointment_id | A unique appointment id |
-| queue_id | A unique queue id for which appointment is made  |
-| status | "APPOINTMENT", "NOSHOW", "CANCELLED" or "QUEUED"  |
-| created_time | Time when the appointment was created |
-| updated_time | Time when the appointment was last updated |
-| booking_details | Once an appointment is moved into the queue, booking details will contain all the details of a queue bookings |
+
 
 ### Cancel a queue booking
 Cancel a queue booking.
@@ -277,7 +245,6 @@ $ curl https://app.hate2wait.io/api/v1/queue_bookings/{booking_id}/cancel
 HTTP/1.1 200 OK
 Content-Type:application/json;charset=UTF-8
 {
-    "code": 0,
     "message": "success",
 }
 
@@ -307,13 +274,12 @@ $ curl https://app.hate2wait.io/api/v1/appointments/{appointment_id}/cancel
 HTTP/1.1 200 OK
 Content-Type:application/json;charset=UTF-8
 {
-    "code": 0,
     "message": "success",
 }
 
 ```
 
-### Get live status of a queue booking
+### Get current status of a queue booking
 Get live status of a queue booking
 
 ### GET /queue_bookings/{booking_id}/status
@@ -337,7 +303,6 @@ $ curl https://app.hate2wait.io/api/v1/queue_bookings/{booking_id}/status
 HTTP/1.1 200 OK
 Content-Type:application/json;charset=UTF-8
 {
-    "code": 0,
     "message": "success",
     "booking_details": {
         "booking_id": "903000000000099",
@@ -388,7 +353,6 @@ $ curl https://app.hate2wait.io/api/v1/appointments/{appointment_id}/status
 HTTP/1.1 200 OK
 Content-Type:application/json;charset=UTF-8
 {
-    "code": 0,
     "message": "success",
     "appointment_details": {
         "appointment_id": "903000000000099",
@@ -445,7 +409,6 @@ $ curl https://app.hate2wait.io/api/v1/queue/{queue_id}/status
 HTTP/1.1 200 OK
 Content-Type:application/json;charset=UTF-8
 {
-    "code": 0,
     "message": "success",
     "queue_details": {
         "queue_id": "37892139127391",
