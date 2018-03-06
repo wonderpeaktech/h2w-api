@@ -6,6 +6,7 @@
 # Quick Reference
 The hate2wait API endpoint is https://app.hate2wait.io/api/v1 and all paths below are relative to that. hate2wait uses HTTP Basic Auth for authentication and all calls must be over HTTPS.
 
+
 ### List All Locations
 List of all locations
 
@@ -47,6 +48,18 @@ Content-Type:application/json;charset=UTF-8
 }
 
 ```
+| Response Fields | Description |
+| ------ | ------ |
+| location_id | A unique location id |
+| location_name | Name of a location  |
+| location_address | Complete address of a location |
+| location_code | Code of a location if set any during creation |
+| google_map_postition | Position (latitude, longitude) of a location on google map |
+| manager_name | Name of the location manager |
+| manager_email | Email of the location manager |
+| manager_phone | Contact No of the location manager |
+| created_time | Time when the location was created |
+| updated_time | Time when the location was last updated |
 
 
 ### List of all the queues of a location
@@ -84,6 +97,12 @@ Content-Type:application/json;charset=UTF-8
 }
 
 ```
+| Response Fields | Description |
+| ------ | ------ |
+| queue_id | A unique queue id |
+| queue_name | Name of a queue  |
+| created_time | Time when the location was created |
+| updated_time | Time when the location was last updated |
 
 ### Create a queue booking
 Create a queue booking.
@@ -113,6 +132,15 @@ $ curl https://app.hate2wait.io/api/v1/queue_bookings
 }
 ```
 
+| Request Parameters | Description |
+| ------ | ------ |
+| queue_id | The ID of the queue for which you want to create a booking (required) |
+| first_name | First name of the person for whom booking is created (optional)  |
+| last_name | Last name of the person for whom booking is created (optional) |
+| phone_number | Phone number on which booking sms is to be send (required) |
+| source | Source of booking. "APP", "WEB", "CALL" or "WALKIN" (optional). Default value is "WALKIN" |
+| additional_info | Additional info about the person for whom booking is created (optional) |
+
 ### Response Example
 
 
@@ -135,6 +163,18 @@ Content-Type:application/json;charset=UTF-8
 }
 
 ```
+
+| Response Fields | Description |
+| ------ | ------ |
+| booking_id | A unique booking id |
+| queue_id | A unique queue id for which booking is made  |
+| token_number | Token Number  |
+| queue_position | Current position in queue |
+| wait_time | Approx waiting time for the turn to come up  |
+| status | "QUEUED", "NOSHOW", "CANCELLED" or "SERVED"  |
+| created_time | Time when the location was created |
+| updated_time | Time when the location was last updated |
+
 
 ### Create an appointment
 Create an appointment.
@@ -186,6 +226,16 @@ Content-Type:application/json;charset=UTF-8
 }
 
 ```
+
+| Parameter | Description |
+| ------ | ------ |
+| queue_id | The ID of the queue for which you want to create a booking (required) |
+| first_name | First name of the person for whom booking is created (optional)  |
+| last_name | Last name of the person for whom booking is created (optional) |
+| phone_number | Phone number on which booking sms is to be send (required) |
+| appointment_time | Appointment time (required)  |
+| source | Source from which booking is created i.e App, Widget, Kiosk, IVR (required) |
+| additional_info | Additional info about the person for whom booking is created (optional) |
 
 ### Cancel a queue booking
 Cancel a queue booking.
@@ -349,6 +399,22 @@ Content-Type:application/json;charset=UTF-8
 }
 
 ```
+
+### Response Status Codes
+
+All hate2wait APIs return a response in json format. The API returns one of the following HTTP status codes.
+
+| Status Code | Description |
+| ------ | ------ |
+| 200 | Request has been executed |
+| 201 | Resource created |
+| 202 | Resource changed |
+| 204 | Resource deleted |
+| 400 | A parameter is missing or is invalid |
+| 401 | Authentication failed |
+| 404 | Resource cannot be found |
+| 405 | HTTP method not allowed |
+| 500 | Server error |
 
 
 License
