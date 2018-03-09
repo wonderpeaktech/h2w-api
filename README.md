@@ -13,7 +13,7 @@ The hate2wait API endpoint is https://app.hate2wait.io/api/v1 and all paths belo
 
 # Getting your Auth Token
 ----
-The hate2wait API is tied to your hate2wait Business account. You will receive your auth token post creating account on hate2wait for Businesses. Our support will help you with creating a auth token to use hate2wait API
+The hate2wait API is tied to your hate2wait Business account. You will receive your auth token on your email post registering it onto hate2wait for Business portal.
 
 # REST API
 ----
@@ -41,15 +41,15 @@ Content-Type:application/json;charset=UTF-8
     "locations": [
         {
             "location_id": "903000000000099",
-            "location_name": "Bowman Furniture",
-            "location_address": "Mr.",
-            "location_code": "Benjamin",
-            "google_map_position": "",
-            "manager_name": "George",
-            "manager_email": "benjamin.george@bowmanfurniture.com",
-            "manager_phone": 23467278,
-            "updated_time": "2016-06-05T02:30:08-0700",
-            "created_time": "2016-06-05T12:30:08-0700"
+            "location_name": "ABC Business",
+            "location_address": "ABC, GD Square",
+            "location_code": "ABCD",
+            "location_latitude": 26.919236,
+            "location_longitude": 80.949191,
+            "location_phone": "12124121213",
+            "manager_name": "ABC",
+            "manager_email": "xyz@example.com",
+            "created_on": "2016-06-05T12:30:08-0700"
         },
         {...},
         {...}
@@ -60,15 +60,15 @@ Content-Type:application/json;charset=UTF-8
 | Response Fields | Description |
 | ------ | ------ |
 | location_id | A unique location id |
-| location_name | Name of a location  |
-| location_address | Complete address of a location |
-| location_code | Code of a location if set any during creation |
-| google_map_postition | Position (latitude, longitude) of a location on google map |
+| location_name | Name of the location  |
+| location_address | Complete address of the location |
+| location_code | Code of the location if set any during creation |
+| location_phone | Phone number of the location |
+| location_latitude | Latitude of the location |
+| location_longitude | Longitude of the location |
 | manager_name | Name of the location manager |
 | manager_email | Email of the location manager |
-| manager_phone | Contact No of the location manager |
-| created_time | Time when the location was created |
-| updated_time | Time when the location was last updated |
+| created_on | Time when the location was created |
 
 -----------------------------------------------------------------------------
 
@@ -80,7 +80,7 @@ List of all the queues created for a particular location.
 
 
 ```sh
-$ curl https://app.hate2wait.io/api/v1/{location_id}/queues
+$ curl https://app.hate2wait.io/api/v1/locations/{location_id}/queues
 -H "Authorization: h2w-authtoken ba4604e8e433g9c892e360d53463oec5"
 -H "Content-Type: application/json;charset=UTF-8"
 ```
@@ -100,9 +100,16 @@ Content-Type:application/json;charset=UTF-8
     "queues": [
         {
             "queue_id": "903000000000099",
-            "queue_name": "Bowman Furniture",
-            "updated_time": "2016-06-05T02:30:08-0700",
-            "created_time": "2016-06-05T12:30:08-0700"
+            "queue_name": "Service Queue",
+            "queue_opening_hours": [
+                {
+                    "weekday": "Monday",
+                    "queue_starting_time": "10:30 AM",
+                    "queue_closing_time": "7:00 PM"
+                },
+                {...},
+                {...}
+            ],
         },
         {...},
         {...}
@@ -114,8 +121,7 @@ Content-Type:application/json;charset=UTF-8
 | ------ | ------ |
 | queue_id | A unique queue id |
 | queue_name | Name of a queue  |
-| created_time | Time when the location was created |
-| updated_time | Time when the location was last updated |
+| queue_opening_hours | Weekly queue schedule   |
 
 -----------------------------------------------------------------------------
 
@@ -153,7 +159,7 @@ $ curl https://app.hate2wait.io/api/v1/queue_bookings
 | first_name | First name of the person for whom booking is created (optional)  |
 | last_name | Last name of the person for whom booking is created (optional) |
 | phone_number | Phone number on which booking sms is to be send (required) |
-| source | Source of booking. "APP", "WEB", "CALL" or "WALKIN" (optional). Default value is "WALKIN" |
+| source | Source of booking. "APP", "WEB", "CALL" or "WALKIN" (optional). Default value is "APP" |
 | additional_info | Additional info about the person for whom booking is created (optional) |
 
 ### Response Example
