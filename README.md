@@ -5,7 +5,7 @@
 
 # Quick Reference
 ----
-The hate2wait API endpoint is https://app.hate2wait.io/api/v1 and all paths below are relative to that. hate2wait uses HTTP Basic Auth for authentication and all calls must be over HTTPS.
+The hate2wait API endpoint is https://api.hate2wait.io/v1 and all paths below are relative to that. hate2wait uses HTTP Basic Auth for authentication and all calls must be over HTTPS.
 
 | Authentication | Description |
 | ------ | ------ |
@@ -25,7 +25,7 @@ List of all locations
 
 
 ```sh
-$ curl https://app.hate2wait.io/api/v1/locations
+$ curl https://api.hate2wait.io/v1/locations
 -H "Authorization: h2w-authtoken ba4604e8e433g9c892e360d53463oec5"
 -H "Content-Type: application/json;charset=UTF-8"
 ```
@@ -80,7 +80,7 @@ List of all the queues created for a particular location.
 
 
 ```sh
-$ curl https://app.hate2wait.io/api/v1/locations/{location_id}/queues
+$ curl https://api.hate2wait.io/v1/locations/{location_id}/queues
 -H "Authorization: h2w-authtoken ba4604e8e433g9c892e360d53463oec5"
 -H "Content-Type: application/json;charset=UTF-8"
 ```
@@ -133,7 +133,7 @@ Create a queue booking.
 
 
 ```sh
-$ curl https://app.hate2wait.io/api/v1/queue_bookings
+$ curl https://api.hate2wait.io/v1/queue_bookings
 -H "Authorization: h2w-authtoken ba4604e8e433g9c892e360d53463oec5"
 -H "Content-Type: application/json;charset=UTF-8"
 -d '{
@@ -149,8 +149,7 @@ $ curl https://app.hate2wait.io/api/v1/queue_bookings
         "latitude": "",
         "longitude": ""
     }
-    
-}
+}'
 ```
 
 | Request Parameters | Description |
@@ -189,7 +188,7 @@ Create an appointment.
 
 
 ```sh
-$ curl https://app.hate2wait.io/api/v1/appointments
+$ curl https://api.hate2wait.io/v1/appointments
 -H "Authorization: h2w-authtoken ba4604e8e433g9c892e360d53463oec5"
 -H "Content-Type: application/json;charset=UTF-8"
 -d '{
@@ -206,8 +205,7 @@ $ curl https://app.hate2wait.io/api/v1/appointments
         "latitude": "",
         "longitude": ""
     }
-    
-}
+}'
 ```
 
 | Request Parameters | Description |
@@ -247,7 +245,7 @@ Cancel a queue booking.
 
 
 ```sh
-$ curl https://app.hate2wait.io/api/v1/queue_bookings/{booking_id}/cancel
+$ curl https://api.hate2wait.io/v1/queue_bookings/{booking_id}/cancel
 -H "Authorization: h2w-authtoken ba4604e8e433g9c892e360d53463oec5"
 -H "Content-Type: application/json;charset=UTF-8"
 ```
@@ -278,7 +276,7 @@ Cancel an appointment
 
 
 ```sh
-$ curl https://app.hate2wait.io/api/v1/appointments/{appointment_id}/cancel
+$ curl https://api.hate2wait.io/v1/appointments/{appointment_id}/cancel
 -H "Authorization: h2w-authtoken ba4604e8e433g9c892e360d53463oec5"
 -H "Content-Type: application/json;charset=UTF-8"
 ```
@@ -309,7 +307,7 @@ Get live status of a queue booking
 
 
 ```sh
-$ curl https://app.hate2wait.io/api/v1/queue_bookings/{booking_id}/status
+$ curl https://api.hate2wait.io/v1/queue_bookings/{booking_id}/status
 -H "Authorization: h2w-authtoken ba4604e8e433g9c892e360d53463oec5"
 -H "Content-Type: application/json;charset=UTF-8"
 ```
@@ -361,7 +359,7 @@ Get status of an appointment
 
 
 ```sh
-$ curl https://app.hate2wait.io/api/v1/appointments/{appointment_id}/status
+$ curl https://api.hate2wait.io/v1/appointments/{appointment_id}/status
 -H "Authorization: h2w-authtoken ba4604e8e433g9c892e360d53463oec5"
 -H "Content-Type: application/json;charset=UTF-8"
 ```
@@ -419,7 +417,7 @@ Get current status of a queue
 
 
 ```sh
-$ curl https://app.hate2wait.io/api/v1/queue/{queue_id}/status
+$ curl https://api.hate2wait.io/v1/queues/{queue_id}/status
 -H "Authorization: h2w-authtoken ba4604e8e433g9c892e360d53463oec5"
 -H "Content-Type: application/json;charset=UTF-8"
 ```
